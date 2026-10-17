@@ -1,0 +1,7 @@
+BẠCH ĐẰNG VPP – MVP 2.0
+
+MỚI: Quản trị → Cập nhật hàng loạt. Chọn Excel/CSV với cột SKU, ghép cột tên, nhóm, phân nhóm, thương hiệu, ĐVT, giá bán. Xem trước thay đổi và xác nhận.
+
+Chỉ sửa SKU đã tồn tại; không tạo sản phẩm mới. Ô trống và cột không chọn không ghi đè. Dòng trùng SKU trong file bị bỏ qua; dòng lỗi giá không hợp lệ bị bỏ qua.
+
+Dữ liệu lưu cục bộ (localStorage), nên sao lưu CSV trước khi thao tác hàng loạt. Đọc Excel cần Internet để tải SheetJS. Chưa có đăng nhập bảo mật hoặc đồng bộ online.

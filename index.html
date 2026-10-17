@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bạch Đằng VPP — Bản mẫu 1.3</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#14273d;background:#f4f7fb}*{box-sizing:border-box}body{margin:0}
+header{background:#115b98;color:white;padding:20px max(18px,calc((100vw - 1100px)/2));display:flex;justify-content:space-between;align-items:center;gap:12px}
+header h1{margin:0;font-size:24px}header small{opacity:.85}main{max-width:1100px;margin:22px auto;padding:0 16px}
+button,input,select,textarea{font:inherit}button{border:0;background:#1265a4;color:white;border-radius:9px;padding:10px 14px;cursor:pointer}
+button.secondary{background:#e9f0f7;color:#154c79}button.danger{background:#fce9e9;color:#a42c2c}
+nav{display:flex;gap:8px;margin-bottom:16px}.panel{background:white;border:1px solid #e0e7ef;border-radius:14px;padding:18px;margin-bottom:16px}
+.row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.product{border:1px solid #e0e7ef;border-radius:12px;padding:15px;background:white;display:flex;flex-direction:column;gap:8px}
+.product img{width:100%;height:140px;object-fit:contain;background:#f5f7fa;border-radius:8px}
+input,select,textarea{padding:10px;border:1px solid #cad5df;border-radius:8px;max-width:100%}
+input[type=number]{width:130px}.muted{color:#64748b;font-size:13px}.price{font-weight:750;color:#0e609d}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px;border-bottom:1px solid #e8edf2}td input{width:125px}
+.hidden{display:none!important}.scroll{overflow:auto}.notice{background:#fff4d9;padding:12px;border-radius:9px;margin-bottom:16px}
+label{display:block;font-size:13px;margin-bottom:5px;color:#536779}.formgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+textarea{width:100%}.pill{background:#edf4fa;color:#175b8f;padding:5px 9px;border-radius:20px;font-size:12px}
+
+/* UI refresh 1.3 */
+:root{--blue:#145b99;--ink:#14283f;--line:#e5ebf2}body{background:#f4f7fc}header{background:linear-gradient(120deg,#073c72,#1468a5 65%,#2084ba);box-shadow:0 6px 22px #103d681f;padding-top:24px;padding-bottom:24px}header h1{letter-spacing:.4px;font-size:26px}header small{display:block;margin-top:4px}main{max-width:1200px}button{transition:transform .16s,box-shadow .16s,background .16s;font-weight:600}button:hover{filter:brightness(.96);transform:translateY(-1px)}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #8bbff1;outline-offset:2px}nav{position:sticky;top:0;z-index:10;background:#fff;padding:9px;border:1px solid var(--line);border-radius:16px;box-shadow:0 6px 22px #183a5a14;gap:8px;flex-wrap:wrap}nav button{background:transparent!important;color:#45627d!important;border-radius:11px;display:flex;align-items:center;gap:9px;padding:13px 19px}nav button.active{background:#e7f2fc!important;color:#0d5e9d!important;box-shadow:inset 0 0 0 1px #bddcf4}nav .nav-icon{font-size:18px}nav .count-pill{background:#d5e9fa;border-radius:99px;padding:2px 7px;font-size:12px}.panel{border:1px solid var(--line);box-shadow:0 3px 15px #1b40640b;border-radius:17px;padding:22px}.panel h2{font-size:20px;margin-top:0}.product{border-color:var(--line);box-shadow:0 3px 14px #163c6110;transition:transform .16s,box-shadow .16s}.product:hover{transform:translateY(-3px);box-shadow:0 12px 25px #163c611e}.product b{min-height:44px}.price{font-size:18px}.notice{font-size:13px;border:1px solid #f3dfa6}.hero{background:linear-gradient(110deg,#e6f2fd,#fff);border:1px solid #d8e7f6;border-radius:18px;padding:23px;margin-bottom:17px;display:flex;justify-content:space-between;align-items:center;gap:12px}.hero h2{margin:0 0 8px;font-size:25px;color:#124f84}.hero p{margin:0;color:#5d7083}.hero-symbol{font-size:54px}.section-lead{margin-bottom:16px}.section-lead h2{margin:0 0 5px}.section-lead p{margin:0;color:#65778a}.admin-shortcuts{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.admin-shortcuts a{padding:9px 12px;border:1px solid #d9e6f2;background:#fff;border-radius:10px;color:#145b99;text-decoration:none;font-size:13px;font-weight:600}.admin-shortcuts a:hover{background:#edf6ff}.panel[id]{scroll-margin-top:105px}.cart-action{background:#0e609d;color:#fff;border-radius:12px;padding:12px 18px;cursor:pointer;white-space:nowrap}.stat-strip{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}.stat-box{background:white;border:1px solid var(--line);padding:13px 18px;border-radius:12px;flex:1;min-width:145px}.stat-box strong{font-size:23px;color:#125b96;display:block}.stat-box small{color:#6b7d8d}#shop>.panel.row{gap:12px}#shop>.panel.row input{min-height:45px}#shop>.panel.row select{min-height:45px}table{font-size:14px}th{background:#f5f8fc;color:#51657b}td{vertical-align:middle}@media(max-width:650px){header{padding:18px}header h1{font-size:20px}main{margin:12px auto;padding:0 10px}nav{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:6px;top:0}nav button{padding:10px 5px;display:flex;flex-direction:column;font-size:11px;gap:4px;text-align:center}nav .nav-icon{font-size:21px}.panel{padding:14px}.hero{padding:16px}.hero h2{font-size:20px}.hero-symbol{font-size:36px}.product{padding:12px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.product img{height:115px}.product .row{gap:5px}.product .row button{padding:8px 10px}.price{font-size:15px}.notice{font-size:12px}}
+.image-picker{grid-column:1/-1;border:1px dashed #9ebbd2;background:#f5faff;border-radius:13px;padding:15px}.image-picker input[type=file]{width:100%;background:white}.image-preview{width:140px;height:120px;object-fit:contain;background:white;border:1px solid #d9e5ef;border-radius:10px;display:none;margin-top:10px}.image-picker .muted{display:block;margin-top:8px}
+.product button{width:100%;margin-top:auto}.product input[type=number]{width:100%;min-height:43px}.product label{margin:0}.product .muted{line-height:1.45}@media(max-width:650px){.product button{padding:10px 6px;font-size:12px}}\n
+/* Giỏ hàng luôn hiện ở góc trên bên phải, là đích cho hiệu ứng bay */
+header{padding-right:205px}
+#floatingCart{position:fixed;top:12px;right:16px;z-index:35;box-shadow:0 8px 22px #052d5270;border:1px solid #a6d8ff}
+#floatingCart.cart-pop{animation:cartPop .38s ease-out}
+@keyframes cartPop{0%{transform:scale(1)}45%{transform:scale(1.15)}100%{transform:scale(1)}}
+.fly-to-cart{position:fixed;z-index:1000;pointer-events:none;width:58px;height:58px;display:grid;place-items:center;border-radius:13px;box-shadow:0 9px 24px #154d7c66;background:#fff;border:2px solid #fff;overflow:hidden;font-size:30px}
+.fly-to-cart img{width:100%;height:100%;object-fit:contain}
+@media(max-width:650px){header{padding-right:125px}#floatingCart{top:9px;right:9px;padding:9px 10px;font-size:11px;max-width:125px;white-space:normal}}
+@media(prefers-reduced-motion:reduce){#floatingCart.cart-pop{animation:none}}
+</style></head><body>
+<header><div><h1>BẠCH ĐẰNG VPP</h1><small>Catalogue văn phòng phẩm • Bản mẫu thử nghiệm 1.8</small></div><button id="floatingCart" class="cart-action" onclick="tab('cart')">🛒 <span id="cartCount">0 sản phẩm</span></button></header>
+<main><div class="notice"><b>Chế độ thử nghiệm:</b> Giá và sản phẩm minh họa. Dữ liệu lưu trong trình duyệt trên thiết bị này, chưa đồng bộ online. Trang quản trị chưa có đăng nhập bảo mật; không sử dụng để vận hành công khai.</div>
+<nav aria-label="Điều hướng chính"><button id="nav-shop" class="active" onclick="tab('shop')"><span class="nav-icon">▦</span> Danh mục sản phẩm</button><button id="nav-cart" onclick="tab('cart')"><span class="nav-icon">🛒</span> Giỏ hàng <span id="navCartCount" class="count-pill">0</span></button><button id="nav-admin" onclick="tab('admin')"><span class="nav-icon">⚙</span> Quản trị</button></nav>
+<section id="shop"><div class="hero"><div><h2>Văn phòng phẩm cho doanh nghiệp</h2><p>Chọn mẫu mã • Xem giá công khai • Đặt nhiều sản phẩm trong một lần</p></div><span class="hero-symbol" aria-hidden="true">📚</span></div><div class="section-lead"><h2>Khám phá sản phẩm</h2><p>Tìm theo tên, mã hàng hoặc lọc theo nhóm và phân nhóm.</p></div><div class="panel row"><input id="search" placeholder="Tìm tên hoặc mã hàng..." oninput="renderShop()" style="flex:1;min-width:220px"><select id="category" onchange="onGroupChange()"><option value="">Tất cả nhóm hàng</option></select><select id="subcategory" onchange="renderShop()"><option value="">Tất cả phân nhóm</option></select><select id="brandFilter" class="hidden" onchange="renderShop()"><option value="">Tất cả thương hiệu</option></select></div><p id="cartFeedback" role="status" style="color:#0d7c49;font-weight:600"></p><div id="cards" class="grid"></div></section>
+<section id="cart" class="hidden"><div class="panel"><h2>Yêu cầu đặt hàng</h2><div class="scroll" id="cartRows"></div><h3 id="cartTotal"></h3><div class="formgrid"><div><label>Tên khách hàng / công ty</label><input id="customer" placeholder="Tên khách hàng"></div><div><label>Số điện thoại</label><input id="customerPhone" placeholder="Số liên hệ"></div></div><p><label>Địa chỉ / ghi chú</label><textarea id="note" rows="3"></textarea></p><button onclick="copyOrder()">Sao chép nội dung đơn hàng</button> <button class="secondary" onclick="openZalo()">Mở Zalo nhận đơn</button><p class="muted">Khách cần dán nội dung và nhấn gửi trong Zalo. Mở Zalo không đồng nghĩa đã gửi đơn tự động.</p></div></section>
+<section id="admin" class="hidden"><div class="section-lead"><h2>Trung tâm quản trị</h2><p>Quản lý sản phẩm, nhập Excel và cập nhật bảng giá tại một nơi.</p></div><div class="stat-strip"><div class="stat-box"><strong id="statProducts">0</strong><small>Tổng mã hàng</small></div><div class="stat-box"><strong id="statPublic">0</strong><small>Đang công khai</small></div><div class="stat-box"><strong id="statDraft">0</strong><small>Đang nháp</small></div></div><div class="admin-shortcuts"><a href="#admin-add">＋ Thêm sản phẩm</a><a href="#admin-import">⇧ Nhập Excel</a><a href="#admin-prices">↻ Cập nhật giá</a><a href="#admin-batch">▦ Cập nhật hàng loạt</a><a href="#admin-list">▤ Danh sách hàng</a><a href="#admin-zalo">✉ Zalo</a></div>
+<div class="panel" id="admin-add"><h2 id="formTitle">＋ Thêm sản phẩm</h2><div class="formgrid">
+<div><label>Mã hàng (duy nhất)</label><input id="sku" placeholder="VD: TL027"><div class="muted" id="skuHint">Mã hàng dùng để đối chiếu khi nhập Excel.</div></div>
+<div><label>Tên sản phẩm</label><input id="name" placeholder="Tên hàng"></div>
+<div><label>Nhóm hàng</label><input id="group" placeholder="Giấy in" list="groupsList"><datalist id="groupsList"></datalist></div><div><label>Phân nhóm</label><input id="subgroup" placeholder="Giấy A4" list="subgroupsList"><datalist id="subgroupsList"></datalist></div>
+<div><label>Thương hiệu</label><input id="brand" placeholder="VD: Thiên Long, Double A" list="brandsList"><datalist id="brandsList"></datalist></div><div><label>Đơn vị tính</label><input id="unit" placeholder="Cây"></div>
+<div><label>Giá bán (đ)</label><input id="price" type="number" min="1"></div>
+<div class="image-picker"><label><b>Ảnh sản phẩm</b> — chọn ảnh trực tiếp từ máy tính hoặc điện thoại</label><input id="photoFile" type="file" accept="image/jpeg,image/png,image/webp" onchange="selectProductPhoto(event)"><img id="photoPreview" class="image-preview" alt="Xem trước ảnh sản phẩm"><span id="photoInfo" class="muted">Có thể tải ảnh lên hoặc dán đường dẫn HTTPS bên dưới. Ảnh trong bản demo chỉ lưu tại trình duyệt hiện tại.</span><p><label>Đường dẫn ảnh HTTPS (không bắt buộc)</label><input id="photo" placeholder="https://..." style="width:100%" oninput="previewPhotoUrl()"></p><button type="button" class="secondary" onclick="clearProductPhoto()">Xóa ảnh đang chọn</button></div></div><p><button id="saveProductBtn" onclick="addProduct()">Thêm sản phẩm</button> <button id="cancelEditBtn" class="secondary hidden" onclick="cancelEdit()">Hủy chỉnh sửa</button></p></div>
+<div class="panel" id="admin-import"><h2>⇧ Thêm sản phẩm hàng loạt từ Excel</h2>
+<p class="muted">Chọn file .xlsx, .xls hoặc .csv. Tự ghép cột mã hàng, tên hàng, nhóm hàng, phân nhóm, thương hiệu, đơn vị tính, giá bán và ảnh (tùy chọn). Mã đã tồn tại sẽ không bị ghi đè.</p>
+<input id="addFile" type="file" accept=".xlsx,.xls,.csv" onchange="loadAddFile(event)">
+<div id="addMapping" class="hidden">
+<div class="formgrid" id="addColumnMapping"></div>
+<p><label><input type="checkbox" id="addDraft" checked> Ẩn sản phẩm chưa có ảnh khỏi catalogue (trạng thái nháp)</label></p>
+<div class="scroll" id="addPreviewTable"></div><p id="addPreviewStats"></p>
+<button onclick="applyAddProducts()">Xác nhận thêm mã mới hợp lệ</button>
+</div></div>
+<div class="panel" id="admin-prices"><h2>↻ Cập nhật giá hàng loạt từ Excel</h2><p class="muted">Nhận .xlsx, .xls, .csv. Tự chọn cột mã hàng và giá, không yêu cầu đúng thứ tự cột. Excel dùng thư viện SheetJS tải từ CDN khi có Internet.</p>
+<input id="file" type="file" accept=".xlsx,.xls,.csv" onchange="loadFile(event)">
+<div id="mapping" class="hidden"><p class="row"><span><label>Cột mã hàng</label><select id="skuCol" onchange="preview()"></select></span><span><label>Cột giá bán mới</label><select id="priceCol" onchange="preview()"></select></span></p>
+<div class="scroll" id="previewTable"></div><p id="previewStats"></p><button onclick="applyPrices()">Xác nhận cập nhật các mã hợp lệ</button></div></div>
+<div class="panel" id="admin-batch"><h2>▦ Cập nhật thông tin sản phẩm hàng loạt</h2>
+<p class="muted">Tải Excel/CSV có cột Mã hàng (SKU) và những thông tin cần sửa. Ghép cột linh hoạt. Cột không chọn hoặc ô để trống sẽ giữ nguyên giá trị hiện tại. Không tạo mã mới.</p>
+<input type="file" id="batchFile" accept=".xlsx,.xls,.csv" onchange="loadBatchFile(event)">
+<div id="batchMapping" class="hidden">
+<div class="formgrid" id="batchFields"></div>
+<p class="muted">Lưu ý: giá bán phải lớn hơn 0. Hệ thống chỉ cập nhật những dòng hợp lệ và có thay đổi. Nếu muốn xóa trắng một trường, hãy sửa thủ công từng sản phẩm.</p>
+<div class="scroll" id="batchPreview"></div><p id="batchStats"></p>
+<button id="batchApply" onclick="applyBatchUpdate()">Xác nhận cập nhật</button>
+</div></div>
+<div class="panel" id="admin-brand"><h2>◉ Cài đặt hiển thị thương hiệu</h2><label style="display:flex;align-items:center;gap:12px;cursor:pointer"><input type="checkbox" id="showBrand" onchange="setBrandVisibility(this.checked)" style="width:20px;height:20px"><b>Hiển thị thương hiệu trên catalogue khách hàng</b></label><p class="muted">Khi bật, khách hàng thấy tên thương hiệu trên từng sản phẩm và có thể lọc theo thương hiệu. Khi tắt, thương hiệu chỉ hiển thị trong Quản trị. Thiết lập áp dụng cho toàn bộ sản phẩm.</p></div>
+<div class="panel" id="admin-list"><div class="row"><h2>▤ Danh sách sản phẩm đã lưu</h2><button class="secondary" onclick="exportCsv()">Xuất CSV</button></div><div class="scroll" id="adminTable"></div></div>
+<div class="panel" id="admin-zalo"><h2>✉ Cài đặt Zalo nhận đơn</h2><label>Số điện thoại Zalo mặc định</label><input id="zaloPhone" placeholder="09xxxxxxxx"><button onclick="saveZalo()">Lưu số Zalo</button><p class="muted">Bản demo mở liên kết Zalo theo số điện thoại; khả năng mở chat phụ thuộc Zalo và thiết bị.</p></div>
+</section></main>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<script>
+const initial=[{sku:"TL027",name:"Bút bi Thiên Long TL-027",group:"Bút viết",unit:"Cây",price:5000,image:""},{sku:"A470",name:"Giấy A4 70gsm",group:"Giấy in",subgroup:"Giấy A4",unit:"Ram",price:78000,image:""},{sku:"BC07",name:"Bìa còng 7cm",group:"Bìa hồ sơ",unit:"Cái",price:35000,image:""}];
+const get=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}};
+let editingSku=null;let draftQty={};let products=get('bd_products',initial).map(p=>({...p,brand:p.brand??p.supplier??''})),showBrand=get('bd_show_brand',false),cart=get('bd_cart',{}),history=get('bd_history',[]),sheetRows=[],previewRows=[],addRows=[],addPreview=[];
+const $=id=>document.getElementById(id),money=n=>new Intl.NumberFormat('vi-VN').format(n)+'đ',safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function persist(){localStorage.setItem('bd_products',JSON.stringify(products));localStorage.setItem('bd_cart',JSON.stringify(cart));localStorage.setItem('bd_history',JSON.stringify(history))}
+function tab(name){['shop','cart','admin'].forEach(id=>{$(id).classList.toggle('hidden',id!==name);$('nav-'+id).classList.toggle('active',id===name)});renderAll();window.scrollTo({top:0,behavior:'smooth'})}
+function changeQty(sku,n){cart[sku]=Math.max(0,(cart[sku]||0)+n);persist();renderAll()}
+function onGroupChange(){$('subcategory').value='';renderShop()}
+function setBrandVisibility(visible){showBrand=!!visible;localStorage.setItem('bd_show_brand',JSON.stringify(showBrand));$('brandFilter').value='';renderAll()}
+function renderShop(){
+let q=$('search').value.toLowerCase(),g=$('category').value,sg=$('subcategory').value,bf=showBrand?$('brandFilter').value:'';
+let publicItems=products.filter(p=>!p.draft);
+let groups=[...new Set(publicItems.map(p=>p.group).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'vi'));
+$('category').innerHTML='<option value="">Tất cả nhóm hàng</option>'+groups.map(x=>`<option value="${safe(x)}" ${g===x?'selected':''}>${safe(x)}</option>`).join('');
+let subgroups=[...new Set(publicItems.filter(p=>!g||p.group===g).map(p=>p.subgroup||'Chưa phân nhóm'))].sort((a,b)=>a.localeCompare(b,'vi'));
+$('subcategory').innerHTML='<option value="">Tất cả phân nhóm</option>'+subgroups.map(x=>`<option value="${safe(x)}" ${sg===x?'selected':''}>${safe(x)}</option>`).join('');
+$('brandFilter').classList.toggle('hidden',!showBrand);let brands=[...new Set(publicItems.map(p=>p.brand).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'vi'));$('brandFilter').innerHTML='<option value="">Tất cả thương hiệu</option>'+brands.map(x=>`<option value="${safe(x)}" ${bf===x?'selected':''}>${safe(x)}</option>`).join('');
+$('cards').innerHTML=publicItems.filter(p=>(!g||p.group===g)&&(!sg||(p.subgroup||'Chưa phân nhóm')===sg)&&(!bf||p.brand===bf)&&(p.name+' '+p.sku).toLowerCase().includes(q)).map(p=>{
+let index=products.indexOf(p),qty=draftQty[p.sku]??1;
+return `<div class="product">${p.image?`<img src="${safe(p.image)}" alt="${safe(p.name)}">`:'<div style="height:140px;display:grid;place-items:center;background:#f1f5f9;border-radius:8px;color:#64748b">Chưa có ảnh</div>'}
+<span class="muted">${safe(p.sku)} • ${safe(p.group)} / ${safe(p.subgroup||'Chưa phân nhóm')}</span>
+<b>${safe(p.name)}</b>
+${showBrand&&p.brand?`<span class="muted">Thương hiệu: ${safe(p.brand)}</span>`:''}
+<span class="price">${money(p.price)} / ${safe(p.unit)}</span>
+<label for="qty_${index}">Số lượng cần đặt</label>
+<input id="qty_${index}" type="number" min="1" step="1" inputmode="numeric" value="${qty}" onchange="draftQty[products[${index}].sku]=this.value" style="width:100%">
+<button onclick="addToCart(${index})">🛒 Thêm vào giỏ hàng</button>
+</div>`}).join('')||'<p>Không tìm thấy sản phẩm.</p>';
+}
+function animateToCart(sourceCard){
+ const target=$('floatingCart');
+ if(!sourceCard||!target)return;
+ const pop=()=>{target.classList.remove('cart-pop');void target.offsetWidth;target.classList.add('cart-pop')};
+ if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){pop();return}
+ const origin=(sourceCard.querySelector('img')||sourceCard.querySelector('button')).getBoundingClientRect();
+ const end=target.getBoundingClientRect();
+ const startX=origin.left+origin.width/2-29,startY=origin.top+origin.height/2-29;
+ const endX=end.left+end.width/2-29,endY=end.top+end.height/2-29;
+ const flying=document.createElement('div');flying.className='fly-to-cart';
+ const image=sourceCard.querySelector('img');
+ if(image){const cloned=image.cloneNode(true);cloned.removeAttribute('id');flying.appendChild(cloned)}else{flying.textContent='📦'}
+ flying.style.left=startX+'px';flying.style.top=startY+'px';document.body.appendChild(flying);
+ const dx=endX-startX,dy=endY-startY;
+ if(typeof flying.animate==='function'){
+  const animation=flying.animate([
+   {transform:'translate(0,0) scale(1)',opacity:1,offset:0},
+   {transform:`translate(${dx*.48}px,${dy*.48-75}px) scale(.85)`,opacity:1,offset:.5},
+   {transform:`translate(${dx}px,${dy}px) scale(.2)`,opacity:.2,offset:1}
+  ],{duration:750,easing:'cubic-bezier(.2,.65,.25,1)'});
+  animation.onfinish=()=>{flying.remove();pop()};
+  animation.oncancel=()=>flying.remove();
+ }else{flying.remove();pop()}
+}
+function addToCart(index){
+ let p=products[index];if(!p)return;
+ let input=$('qty_'+index),n=Number(input.value);
+ if(!Number.isSafeInteger(n)||n<1||n>99999)return alert('Số lượng phải là số nguyên từ 1 đến 99.999');
+ const card=input.closest('.product');
+ animateToCart(card);
+ cart[p.sku]=(cart[p.sku]||0)+n;draftQty[p.sku]=1;persist();renderAll();
+ $('cartFeedback').textContent='Đã thêm '+n+' '+p.unit+' '+p.name+' vào giỏ hàng.';
+ clearTimeout(window.cartFeedbackTimeout);
+ window.cartFeedbackTimeout=setTimeout(()=>{$('cartFeedback').textContent=''},3500)
+}
+function setCartQty(index,value){let p=products[index];if(!p)return;let n=Number(value);if(!Number.isSafeInteger(n)||n<0||n>99999)return alert('Số lượng phải là số nguyên từ 0 đến 99.999');cart[p.sku]=n;persist();renderCart()}
+function renderCart(){let lines=products.filter(p=>cart[p.sku]>0);let qty=lines.reduce((s,p)=>s+cart[p.sku],0);$('cartCount').textContent=qty+' sản phẩm';$('navCartCount').textContent=qty;$('cartRows').innerHTML=lines.length?'<table><tr><th>Sản phẩm</th><th>Số lượng</th><th>Thành tiền</th><th></th></tr>'+lines.map(p=>`<tr><td>${safe(p.name)}</td><td><input aria-label="Số lượng ${safe(p.name)}" type="number" min="0" step="1" value="${cart[p.sku]}" onchange="setCartQty(${products.indexOf(p)},this.value)"></td><td>${money(p.price*cart[p.sku])}</td><td><button class="danger" onclick="setCartQty(${products.indexOf(p)},0)">Xóa</button></td></tr>`).join('')+'</table>':'Giỏ hàng trống';$('cartTotal').textContent='Tạm tính: '+money(lines.reduce((s,p)=>s+p.price*cart[p.sku],0))}
+
+function orderText(){let lines=products.filter(p=>cart[p.sku]>0);return 'YÊU CẦU ĐẶT HÀNG - BẠCH ĐẰNG VPP\nKhách: '+$('customer').value+'\nSĐT: '+$('customerPhone').value+'\n'+lines.map((p,i)=>`${i+1}. ${p.sku} - ${p.name}: ${cart[p.sku]} ${p.unit} x ${money(p.price)} = ${money(cart[p.sku]*p.price)}`).join('\n')+'\nTổng tạm tính: '+money(lines.reduce((s,p)=>s+p.price*cart[p.sku],0))+'\nGhi chú: '+$('note').value+'\nVui lòng xác nhận hàng và giá.'}
+async function copyOrder(){if(!Object.values(cart).some(x=>x>0))return alert('Giỏ hàng trống');try{await navigator.clipboard.writeText(orderText());alert('Đã sao chép. Hãy dán vào Zalo và nhấn gửi.')}catch{prompt('Sao chép nội dung này:',orderText())}}
+function openZalo(){let phone=get('bd_zalo','');if(!phone)return alert('Chưa cài số Zalo nhận đơn trong trang quản trị');window.open('https://zalo.me/'+encodeURIComponent(phone),'_blank','noopener,noreferrer')}
+function saveZalo(){let p=$('zaloPhone').value.trim();if(!/^0\d{9}$/.test(p))return alert('Nhập số điện thoại Việt Nam gồm 10 chữ số');localStorage.setItem('bd_zalo',JSON.stringify(p));alert('Đã lưu trên trình duyệt này')}
+let pendingPhoto=null;
+function showPhotoPreview(src){let el=$('photoPreview');if(src){el.src=src;el.style.display='block'}else{el.removeAttribute('src');el.style.display='none'}}
+function previewPhotoUrl(){let url=$('photo').value.trim();if(url&&/^https:\/\//i.test(url)){pendingPhoto=null;showPhotoPreview(url)}else if(!url&&!pendingPhoto)showPhotoPreview('')}
+function clearProductPhoto(){pendingPhoto=null;$('photo').value='';$('photoFile').value='';showPhotoPreview('');$('photoInfo').textContent='Ảnh sẽ được xóa khi bạn bấm Lưu thay đổi.'}
+async function selectProductPhoto(event){let file=event.target.files[0];if(!file)return;if(!['image/jpeg','image/png','image/webp'].includes(file.type)){alert('Chỉ hỗ trợ JPG, PNG, WebP');event.target.value='';return}try{let bitmap=await createImageBitmap(file),scale=Math.min(1,520/Math.max(bitmap.width,bitmap.height)),canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(bitmap.width*scale));canvas.height=Math.max(1,Math.round(bitmap.height*scale));canvas.getContext('2d').drawImage(bitmap,0,0,canvas.width,canvas.height);if(bitmap.close)bitmap.close();let data=canvas.toDataURL('image/jpeg',.65);if(data.length>190000)throw Error('Ảnh vẫn quá lớn sau nén. Hãy chọn ảnh khác.');pendingPhoto=data;$('photo').value='';showPhotoPreview(data);$('photoInfo').textContent='Đã chọn: '+file.name+' (ảnh được nén để lưu trong bản demo).'}catch(err){alert('Không xử lý được ảnh: '+err.message);event.target.value=''}}
+function cancelEdit(){editingSku=null;pendingPhoto=null;$('photoFile').value='';showPhotoPreview('');$('photoInfo').textContent='Có thể tải ảnh lên hoặc dán đường dẫn HTTPS bên dưới. Ảnh trong bản demo chỉ lưu tại trình duyệt hiện tại.';['sku','name','group','subgroup','brand','unit','price','photo'].forEach(id=>$(id).value='');$('sku').readOnly=false;$('formTitle').textContent='＋ Thêm sản phẩm';$('saveProductBtn').textContent='Thêm sản phẩm';$('cancelEditBtn').classList.add('hidden');$('skuHint').textContent='Mã hàng dùng để đối chiếu khi nhập Excel.'}
+function editProduct(index){let p=products[index];if(!p)return;editingSku=p.sku;[['sku',p.sku],['name',p.name],['group',p.group],['subgroup',p.subgroup||''],['brand',p.brand||''],['unit',p.unit],['price',p.price],['photo',p.image||'']].forEach(([id,value])=>$(id).value=value);pendingPhoto=null;$('photoFile').value='';showPhotoPreview(p.image||'');$('photoInfo').textContent=p.image?'Đang hiển thị ảnh đã lưu. Chọn ảnh mới để thay thế.':'Sản phẩm chưa có ảnh.';$('sku').readOnly=true;$('formTitle').textContent='✎ Chỉnh sửa sản phẩm: '+p.sku;$('saveProductBtn').textContent='Lưu thay đổi';$('cancelEditBtn').classList.remove('hidden');$('skuHint').textContent='Mã hàng được khóa khi sửa để tránh mất liên kết với giỏ hàng và file Excel.';tab('admin');$('admin-add').scrollIntoView({behavior:'smooth',block:'start'});$('name').focus()}
+function addProduct(){let sku=$('sku').value.trim(),name=$('name').value.trim(),group=$('group').value.trim(),subgroup=$('subgroup').value.trim(),brand=$('brand').value.trim(),unit=$('unit').value.trim(),price=Number($('price').value),image=pendingPhoto||$('photo').value.trim();if(!sku||!name||!group||!unit||!Number.isFinite(price)||price<=0)return alert('Vui lòng nhập đủ thông tin hợp lệ');if(image&&!/^https:\/\//i.test(image)&&!/^data:image\/jpeg;base64,/i.test(image))return alert('Link hình ảnh phải bắt đầu bằng https://');let index=products.findIndex(p=>p.sku===sku);if(editingSku){if(sku!==editingSku||index<0)return alert('Không tìm thấy mã hàng đang chỉnh sửa');let old=products[index];if(old.price!==price)history.push({sku,old:old.price,next:price,time:new Date().toISOString()});products[index]={...old,sku,name,group,subgroup,brand,unit,price,image};}else{if(index>=0)return alert('Mã hàng đã tồn tại. Hãy chọn nút Sửa ở danh sách sản phẩm.');products.push({sku,name,group,subgroup,brand,unit,price,image,draft:false})}try{persist()}catch(e){products=get('bd_products',initial);alert('Không đủ dung lượng lưu ảnh trên trình duyệt. Hãy chọn ảnh nhỏ hơn hoặc dùng link ảnh HTTPS.');return}cancelEdit();renderAll();alert('Đã lưu sản phẩm trong bản demo')}
+function renderAdmin(){$('statProducts').textContent=products.length;$('statPublic').textContent=products.filter(p=>!p.draft).length;$('statDraft').textContent=products.filter(p=>p.draft).length;$('zaloPhone').value=get('bd_zalo','');$('showBrand').checked=showBrand;$('groupsList').innerHTML=[...new Set(products.map(p=>p.group))].map(g=>`<option value="${safe(g)}"></option>`).join('');$('subgroupsList').innerHTML=[...new Set(products.map(p=>p.subgroup).filter(Boolean))].map(g=>`<option value="${safe(g)}"></option>`).join('');$('brandsList').innerHTML=[...new Set(products.map(p=>p.brand).filter(Boolean))].map(x=>`<option value="${safe(x)}"></option>`).join('');$('adminTable').innerHTML='<table><tr><th>Mã</th><th>Tên</th><th>Nhóm / phân nhóm</th><th>Thương hiệu</th><th>Giá bán</th><th>Hiển thị</th><th>Thao tác</th></tr>'+products.map((p,i)=>`<tr><td>${safe(p.sku)}</td><td>${safe(p.name)}</td><td>${safe(p.group)} / ${safe(p.subgroup||"Chưa phân nhóm")}</td><td>${safe(p.brand||"Chưa có thương hiệu")}</td><td><input aria-label="Giá ${safe(p.sku)}" type="number" min="1" id="price_${safe(p.sku)}" value="${p.price}"></td><td><button class="secondary" onclick="toggleDraft('${safe(p.sku)}')">${p.draft?'Nháp':'Công khai'}</button></td><td><button class="secondary" onclick="saveSinglePrice('${safe(p.sku)}')">Lưu giá</button> <button onclick="editProduct(${i})">✎ Sửa</button></td></tr>`).join('')+'</table>'}
+function toggleDraft(sku){let p=products.find(x=>x.sku===sku);if(!p)return;p.draft=!p.draft;persist();renderAll()}
+const addFields=[['sku','Mã hàng',true,['mã hàng','mã sp','mã sản phẩm','sku','code']],['name','Tên sản phẩm',true,['tên hàng','tên sản phẩm','tên sp','product name']],['group','Nhóm hàng',false,['nhóm hàng','nhóm chính','category']],['subgroup','Phân nhóm',false,['phân nhóm','nhóm con','subgroup','subcategory']],['brand','Thương hiệu',false,['thương hiệu','brand','hãng','nhà cung cấp','ncc','supplier','vendor']],['unit','Đơn vị tính',false,['đơn vị tính','đvt','unit']],['price','Giá bán',true,['giá bán','đơn giá','price','giá']],['image','Link hình ảnh',false,['hình ảnh','image','ảnh','url']]];
+function loadAddFile(e){let file=e.target.files[0];if(!file)return;let reader=new FileReader();reader.onload=()=>{try{if(typeof XLSX==='undefined')throw Error('Chưa tải được thư viện Excel. Hãy kiểm tra Internet.');let wb=XLSX.read(reader.result,{type:'array'}),ws=wb.Sheets[wb.SheetNames[0]];addRows=XLSX.utils.sheet_to_json(ws,{header:1,defval:''}).filter(r=>r.some(v=>String(v).trim()));if(addRows.length<2)throw Error('File cần có tiêu đề và ít nhất một sản phẩm');let headers=addRows[0];$('addColumnMapping').innerHTML=addFields.map(([key,title,required,words])=>{let options='<option value="">— '+(required?'Chọn cột':'Không có / dùng mặc định')+' —</option>'+headers.map((h,i)=>`<option value="${i}">${safe(h||'Cột '+(i+1))}</option>`).join('');return `<div><label>${title}${required?' *':''}</label><select id="addcol_${key}" onchange="previewAdd()">${options}</select></div>`}).join('');addFields.forEach(([key,title,required,words])=>{let idx=headers.findIndex(h=>words.some(w=>String(h).toLowerCase().trim().includes(w)));if(idx>=0)$('addcol_'+key).value=String(idx)});$('addMapping').classList.remove('hidden');previewAdd()}catch(err){alert(err.message)}};reader.readAsArrayBuffer(file)}
+function previewAdd(){let selected=Object.fromEntries(addFields.map(([key])=>[key,$('addcol_'+key).value]));if(['sku','name','price'].some(k=>selected[k]==='')){$('addPreviewStats').textContent='Cần chọn đủ 3 cột: mã hàng, tên sản phẩm và giá bán.';$('addPreviewTable').innerHTML='';addPreview=[];return}let chosen=Object.values(selected).filter(x=>x!=='');if(new Set(chosen).size!==chosen.length){$('addPreviewStats').textContent='Một cột Excel đang được chọn cho nhiều trường. Vui lòng chọn lại.';$('addPreviewTable').innerHTML='';addPreview=[];return}
+addPreview=addRows.slice(1).map((r,i)=>{let getField=k=>selected[k]===''?'':String(r[Number(selected[k])]??'').trim();let sku=getField('sku'),name=getField('name'),price=parsePrice(getField('price')),group=getField('group')||'Chưa có nhóm',subgroup=getField('subgroup'),brand=getField('brand'),unit=getField('unit')||'Cái',image=getField('image');let status=!sku||!name||!Number.isFinite(price)||price<=0?'Thiếu / sai dữ liệu':products.some(p=>p.sku===sku)?'Đã tồn tại':'Mã mới';if(image&&!/^https:\/\//i.test(image)&&!/^data:image\/jpeg;base64,/i.test(image))status='Link ảnh không hợp lệ';return{row:i+2,sku,name,group,subgroup,brand,unit,price,image,status}});
+let counts={};addPreview.forEach(r=>{if(r.sku)counts[r.sku]=(counts[r.sku]||0)+1});addPreview.forEach(r=>{if(r.sku&&counts[r.sku]>1)r.status='Trùng mã trong Excel'});
+$('addPreviewTable').innerHTML='<table><tr><th>Dòng</th><th>Mã</th><th>Tên</th><th>Giá</th><th>Trạng thái</th></tr>'+addPreview.slice(0,100).map(r=>`<tr><td>${r.row}</td><td>${safe(r.sku)}</td><td>${safe(r.name)}</td><td>${Number.isFinite(r.price)?money(r.price):'—'}</td><td>${r.status}</td></tr>`).join('')+'</table>';
+$('addPreviewStats').textContent=`${addPreview.filter(r=>r.status==='Mã mới').length} mã mới hợp lệ; ${addPreview.filter(r=>r.status==='Đã tồn tại').length} mã đã tồn tại; ${addPreview.filter(r=>!['Mã mới','Đã tồn tại'].includes(r.status)).length} dòng lỗi/trùng. Xem trước tối đa 100 dòng.`}
+function applyAddProducts(){let valid=addPreview.filter(r=>r.status==='Mã mới');if(!valid.length)return alert('Không có mã mới hợp lệ');if(!confirm('Thêm '+valid.length+' sản phẩm mới? Các mã đã tồn tại sẽ giữ nguyên.'))return;let draftIfNoImage=$('addDraft').checked;let added=0;valid.forEach(r=>{if(products.some(p=>p.sku===r.sku))return;products.push({sku:r.sku,name:r.name,group:r.group,subgroup:r.subgroup,brand:r.brand,unit:r.unit,price:r.price,image:r.image,draft:draftIfNoImage&&!r.image});added++});persist();renderAll();$('addMapping').classList.add('hidden');$('addFile').value='';addPreview=[];alert('Đã thêm '+added+' sản phẩm vào bản demo. Sản phẩm nháp có thể bật công khai ở bảng giá.')}
+function saveSinglePrice(sku){let p=products.find(x=>x.sku===sku),v=Number($('price_'+sku).value);if(!Number.isFinite(v)||v<=0)return alert('Giá không hợp lệ');history.push({sku,old:p.price,next:v,time:new Date().toISOString()});p.price=v;persist();renderAll()}
+function renderAll(){renderShop();renderCart();renderAdmin()}
+function loadFile(e){let file=e.target.files[0];if(!file)return;let reader=new FileReader();reader.onload=()=>{try{if(typeof XLSX==='undefined')throw Error('Chưa tải được thư viện Excel. Hãy kiểm tra Internet.');let wb=XLSX.read(reader.result,{type:'array'}),ws=wb.Sheets[wb.SheetNames[0]];sheetRows=XLSX.utils.sheet_to_json(ws,{header:1,defval:''}).filter(r=>r.some(v=>String(v).trim()));if(sheetRows.length<2)throw Error('File cần có dòng tiêu đề và dữ liệu');let cols=sheetRows[0];['skuCol','priceCol'].forEach(id=>$(id).innerHTML=cols.map((c,i)=>`<option value="${i}">${safe(c||'Cột '+(i+1))}</option>`).join(''));let findCol=words=>cols.findIndex(c=>words.some(w=>String(c).toLowerCase().includes(w)));let si=findCol(['mã','sku','code']),pi=findCol(['giá bán','đơn giá','price','giá']);$('skuCol').value=String(si>=0?si:0);$('priceCol').value=String(pi>=0?pi:Math.min(1,cols.length-1));$('mapping').classList.remove('hidden');preview()}catch(err){alert(err.message)}};reader.readAsArrayBuffer(file)}
+function parsePrice(x){if(typeof x==='number')return x;let s=String(x??'').trim().replace(/[^\d,.-]/g,'');if(!s)return NaN;if(s.includes(',')&&s.includes('.'))s=s.replace(/\./g,'').replace(',','.');else if(/^\d{1,3}([.,]\d{3})+$/.test(s))s=s.replace(/[.,]/g,'');else s=s.replace(',','.');return Number(s)}
+function preview(){let si=Number($('skuCol').value),pi=Number($('priceCol').value);previewRows=sheetRows.slice(1).map((r,i)=>{let sku=String(r[si]??'').trim(),price=parsePrice(r[pi]),matches=products.filter(p=>p.sku===sku),status=!sku||!Number.isFinite(price)||price<=0?'Lỗi dữ liệu':matches.length!==1?'Không tìm thấy / trùng mã':'Hợp lệ';return{row:i+2,sku,price,old:matches[0]?.price,status}});let duplicates=new Set(previewRows.filter((r,i)=>previewRows.some((x,j)=>j!==i&&x.sku===r.sku)).map(r=>r.sku));previewRows.forEach(r=>{if(duplicates.has(r.sku))r.status='Trùng mã trong file'});$('previewTable').innerHTML='<table><tr><th>Dòng</th><th>Mã</th><th>Giá cũ</th><th>Giá mới</th><th>Trạng thái</th></tr>'+previewRows.slice(0,100).map(r=>`<tr><td>${r.row}</td><td>${safe(r.sku)}</td><td>${r.old==null?'—':money(r.old)}</td><td>${Number.isFinite(r.price)?money(r.price):'—'}</td><td>${r.status}</td></tr>`).join('')+'</table>';$('previewStats').textContent=`${previewRows.filter(r=>r.status==='Hợp lệ').length} mã hợp lệ / ${previewRows.length} dòng. Hiển thị tối đa 100 dòng xem trước.`}
+function applyPrices(){let valid=previewRows.filter(r=>r.status==='Hợp lệ');if(!valid.length)return alert('Không có mã hợp lệ');if(!confirm('Cập nhật '+valid.length+' mã hàng?'))return;valid.forEach(r=>{let p=products.find(x=>x.sku===r.sku);if(p.price!==r.price){history.push({sku:p.sku,old:p.price,next:r.price,time:new Date().toISOString()});p.price=r.price}});persist();renderAll();$('mapping').classList.add('hidden');alert('Đã cập nhật trong bản demo trên trình duyệt này')}
+// Batch edit existing products by SKU. A blank cell means keep existing data.
+let batchRows=[],batchPreviewRows=[];
+const batchSpecs=[
+ ['sku','Mã hàng (SKU)',['mã hàng','mã sp','mã sản phẩm','sku','code']],
+ ['name','Tên sản phẩm',['tên sản phẩm','tên hàng','tên sp','product name']],
+ ['group','Nhóm hàng',['nhóm hàng','nhóm','category']],
+ ['subgroup','Phân nhóm',['phân nhóm','nhóm con','subcategory','subgroup']],
+ ['brand','Thương hiệu',['thương hiệu','brand','nhãn hiệu','ncc','nhà cung cấp']],
+ ['unit','Đơn vị tính',['đơn vị tính','đvt','unit']],
+ ['price','Giá bán',['giá bán','đơn giá','price','giá']]
+];
+function loadBatchFile(e){let file=e.target.files[0];if(!file)return;let reader=new FileReader();reader.onload=()=>{try{
+ if(typeof XLSX==='undefined')throw Error('Không tải được thư viện Excel. Kiểm tra kết nối Internet.');
+ let wb=XLSX.read(reader.result,{type:'array'}),ws=wb.Sheets[wb.SheetNames[0]];
+ batchRows=XLSX.utils.sheet_to_json(ws,{header:1,defval:''}).filter(r=>r.some(v=>String(v??'').trim()));
+ if(batchRows.length<2)throw Error('File cần có dòng tiêu đề và ít nhất một dòng dữ liệu.');
+ let headers=batchRows[0];$('batchFields').innerHTML=batchSpecs.map(([key,label,aliases])=>{
+  let opts=(key==='sku'?'':'<option value="-1">— Không cập nhật —</option>')+headers.map((h,i)=>`<option value="${i}">${safe(String(h||'Cột '+(i+1)))}</option>`).join('');
+  return `<div><label>${safe(label)}</label><select id="batch_${key}" onchange="previewBatchUpdate()">${opts}</select></div>`;
+ }).join('');
+ let used=new Set();batchSpecs.forEach(([key,label,aliases])=>{
+  let idx=headers.findIndex((h,i)=>!used.has(i)&&aliases.some(a=>String(h).toLowerCase().trim()===a));
+  if(idx<0)idx=headers.findIndex((h,i)=>!used.has(i)&&aliases.some(a=>String(h).toLowerCase().includes(a)));
+  if(idx>=0)used.add(idx);
+  $('batch_'+key).value=String(idx>=0?idx:key==='sku'?0:-1);
+ });
+ $('batchMapping').classList.remove('hidden');previewBatchUpdate();
+ }catch(err){alert(err.message)}};reader.readAsArrayBuffer(file)}
+function previewBatchUpdate(){
+ let mapping=Object.fromEntries(batchSpecs.map(([k])=>[k,Number($('batch_'+k).value)]));
+ let selected=batchSpecs.filter(([k])=>k!=='sku'&&mapping[k]>=0).map(([k])=>k);
+ let duplicateMapping=Object.values(mapping).filter(v=>v>=0).some((v,i,a)=>a.indexOf(v)!==i);
+ let counts=new Map();batchRows.slice(1).forEach(r=>{let sku=String(r[mapping.sku]??'').trim();if(sku)counts.set(sku,(counts.get(sku)||0)+1)});
+ batchPreviewRows=batchRows.slice(1).map((row,i)=>{
+  let sku=String(row[mapping.sku]??'').trim(),matches=products.filter(p=>p.sku===sku),old=matches[0],changes={},status='Hợp lệ';
+  if(mapping.sku<0||!sku)status='Thiếu mã hàng';
+  else if(duplicateMapping)status='Trùng cột ghép';
+  else if(counts.get(sku)>1)status='Trùng SKU trong Excel';
+  else if(matches.length!==1)status='Không tìm thấy / trùng SKU';
+  else if(!selected.length)status='Chưa chọn trường cập nhật';
+  else {
+   for(let key of selected){let raw=row[mapping[key]];if(String(raw??'').trim()==='')continue;
+    let value=key==='price'?parsePrice(raw):String(raw).trim();
+    if(key==='price'&&(!Number.isFinite(value)||value<=0)){status='Giá không hợp lệ';break}
+    if(key!=='price'&&value.length>300){status='Nội dung quá dài';break}
+    if(String(old[key]??'')!==String(value))changes[key]={old:old[key]??'',next:value};
+   }
+   if(status==='Hợp lệ'&&!Object.keys(changes).length)status='Không có thay đổi';
+  }
+  return{row:i+2,sku,status,changes};
+ });
+ const labels=Object.fromEntries(batchSpecs.map(([k,l])=>[k,l]));
+ $('batchPreview').innerHTML='<table><tr><th>Dòng</th><th>SKU</th><th>Thông tin thay đổi (cũ → mới)</th><th>Trạng thái</th></tr>'+batchPreviewRows.slice(0,150).map(r=>`<tr><td>${r.row}</td><td>${safe(r.sku)}</td><td>${Object.entries(r.changes).map(([k,v])=>`<div><b>${safe(labels[k])}:</b> ${safe(String(v.old))} → ${safe(String(v.next))}</div>`).join('')||'—'}</td><td>${safe(r.status)}</td></tr>`).join('')+'</table>';
+ let n=batchPreviewRows.filter(r=>r.status==='Hợp lệ').length;
+ $('batchStats').textContent=`${n} mã có thể cập nhật / ${batchPreviewRows.length} dòng. Xem trước tối đa 150 dòng.`;
+ $('batchApply').disabled=n===0;
+}
+function applyBatchUpdate(){let valid=batchPreviewRows.filter(r=>r.status==='Hợp lệ');if(!valid.length)return alert('Không có dòng cần cập nhật.');
+ if(!confirm(`Xác nhận cập nhật ${valid.length} mã sản phẩm?`))return;
+ valid.forEach(r=>{let p=products.find(x=>x.sku===r.sku);if(!p)return;
+  Object.entries(r.changes).forEach(([k,v])=>{if(k==='price')history.push({sku:p.sku,old:p.price,next:v.next,time:new Date().toISOString()});p[k]=v.next});
+ });
+ persist();renderAll();$('batchMapping').classList.add('hidden');$('batchFile').value='';batchRows=[];batchPreviewRows=[];
+ alert(`Đã cập nhật ${valid.length} sản phẩm trong trình duyệt này.`);
+}
+function exportCsv(){let data=[['Mã hàng','Tên sản phẩm','Nhóm','Phân nhóm','Thương hiệu','ĐVT','Giá bán'],...products.map(p=>[p.sku,p.name,p.group,p.subgroup||"",p.brand||"",p.unit,p.price])];let csv='\ufeff'+data.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\r\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='bang_gia_bach_dang.csv';a.click();URL.revokeObjectURL(a.href)}
+renderAll();
+</script></body></html>
